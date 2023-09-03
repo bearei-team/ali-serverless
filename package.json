@@ -1,11 +1,11 @@
 {
   "name": "@bearei/ali-serverless",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./lib/commonjs/index",
   "module": "./lib/module/index",
   "types": "./lib/commonjs/index.d.ts",
   "author": "bearei <bear_ei@outlook.com>",
-  "description": "Provide some utility wrappers for fetch",
+  "description": "Alibaba Cloud serverless function invocation client",
   "license": "MIT",
   "readmeFilename": "README.md",
   "keywords": [
@@ -22,7 +22,7 @@
     "url": "https://github.com/bearei-team/ali-serverless/issues"
   },
   "dependencies": {
-    "@bearei/ei": "^1.2.1"
+    "@bearei/ei": "^1.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",

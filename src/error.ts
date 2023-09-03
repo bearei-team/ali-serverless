@@ -1,23 +1,6 @@
 import { Err } from '@bearei/ei';
 import { HttpTriggerInvokeOptions } from './invoke';
 
-export interface ServerlessErr extends Err, Partial<ProcessErrorOptions> {
-  /**
-   * Custom error code when calling the Serverless function.
-   */
-  code?: number;
-
-  /**
-   * Serverless function call error.
-   */
-  error?: ServerlessErr;
-
-  /**
-   * Serverless function API call chain information.
-   */
-  chains?: ProcessErrorOptions[];
-}
-
 export type CreateProcessInvokeErrorOptions = Pick<
   HttpTriggerInvokeOptions,
   'serviceName' | 'functionName'
@@ -31,6 +14,23 @@ export interface ProcessErrorOptions extends CreateProcessInvokeErrorOptions {
   requestId?: string;
 }
 
+export interface ServerlessErr extends Err, Partial<ProcessErrorOptions> {
+  /**
+   * Custom error code when calling the Serverless function.
+   */
+  code?: number | string;
+
+  /**
+   * Serverless function call error.
+   */
+  error?: ServerlessErr;
+
+  /**
+   * Serverless function API call chain information.
+   */
+  chains?: ProcessErrorOptions[];
+}
+
 export interface CreatedError {
   createProcessInvokeError: typeof createProcessInvokeError;
 }
@@ -38,11 +38,11 @@ export interface CreatedError {
 const createErr = (
   error: ServerlessErr,
   { serviceName, functionName, requestId, path }: ProcessErrorOptions,
-) => {
+): ServerlessErr => {
   const status = error.status ?? 500;
   const statusText = error.statusText ?? '';
   const code =
-    error.code && typeof error.code === 'number' ? error.code : status;
+    error.code ?? typeof error.code === 'number' ? error.code : status;
 
   const err = (error.status ? error : { error }) as ServerlessErr;
   const currentChains = [{ serviceName, functionName, path }];
@@ -70,7 +70,7 @@ const createErr = (
 
 const createProcessInvokeError =
   (options: CreateProcessInvokeErrorOptions) =>
-  (error: Err): never => {
+  (error: ServerlessErr): never => {
     const headers = (error.headers ?? {}) as Record<string, string>;
     const requestId = headers['x-fc-request-id'];
 
