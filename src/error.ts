@@ -42,7 +42,7 @@ const createErr = (
   const status = error.status ?? 500;
   const statusText = error.statusText ?? '';
   const code =
-    error.code ?? typeof error.code === 'number' ? error.code : status;
+    error.code || typeof error.code === 'number' ? error.code : status;
 
   const err = (error.status ? error : { error }) as ServerlessErr;
   const currentChains = [{ serviceName, functionName, path }];
