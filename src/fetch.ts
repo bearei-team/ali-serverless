@@ -28,14 +28,20 @@ export interface CreatedFetch {
 const { processFetchHeaders } = HEADERS;
 const eiFetch = (
   url: string,
-  { method, data, isAsync = false, host, ...args }: FetchOptions,
+  { method, data, isAsync = false, host, headers, ...args }: FetchOptions,
 ): Promise<FetchResponse> => {
-  const headers = processFetchHeaders({ isAsync, host, data }) as Record<
-    string,
-    string
-  >;
+  const processedHeaders = processFetchHeaders({
+    isAsync,
+    host,
+    data,
+  }) as Record<string, string>;
 
-  return ei(url, { ...args, method, headers, ...(data && { data }) });
+  return ei(url, {
+    ...args,
+    method,
+    headers: { ...headers, ...processedHeaders },
+    ...(data && { data }),
+  });
 };
 
 const createFetch = (): CreatedFetch => ({ eiFetch });
