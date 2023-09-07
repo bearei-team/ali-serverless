@@ -26,15 +26,15 @@ const processFetchHeaders = ({
   data,
 }: ProcessFetchHeadersOptions): ProcessedFetchHeaders => {
   const headers = {
+    ...(isAsync && { 'x-fc-invocation-type': 'Async' }),
+    ...(data && {
+      'content-length': `${Buffer.byteLength(JSON.stringify(data))}`,
+    }),
     accept: '*/*',
     date: new Date().toUTCString(),
     host,
     'user-agent': `Node.js(${process.version}) OS(${process.platform}/${process.arch})`,
     'content-type': 'application/json; charset=utf-8',
-    ...(isAsync && { 'x-fc-invocation-type': 'Async' }),
-    ...(data && {
-      'content-length': `${Buffer.byteLength(JSON.stringify(data))}`,
-    }),
   };
 
   return headers;

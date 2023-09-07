@@ -35,7 +35,7 @@ const eiFetch = (
     string
   >;
 
-  return ei(url, { method, headers, ...(data && { data }), ...args });
+  return ei(url, { ...args, method, headers, ...(data && { data }) });
 };
 
 const createFetch = (): CreatedFetch => ({ eiFetch });
