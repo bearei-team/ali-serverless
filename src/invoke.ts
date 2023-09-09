@@ -31,8 +31,6 @@ export interface Invoke {
   httpTrigger: (options: HttpTriggerInvokeOptions) => Promise<FetchResponse>;
 }
 
-const { createProcessInvokeError } = ERROR;
-const { eiFetch } = FETCH;
 const createHttpTriggerInvoke =
   ({
     isInternal,
@@ -53,13 +51,13 @@ const createHttpTriggerInvoke =
     const network = isInternal ? '-internal' : '';
     const host = `${subdomain}.${region}${network}.${domain}`;
     const endpoint = `${protocol}://${host}`;
-    const processInvokeError = createProcessInvokeError({
+    const processInvokeError = ERROR.createProcessInvokeError({
       serviceName,
       functionName,
       path,
     });
 
-    return eiFetch(path, {
+    return FETCH.eiFetch(path, {
       ...args,
       host,
       baseURL: endpoint,

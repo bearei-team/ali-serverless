@@ -25,12 +25,11 @@ export interface CreatedFetch {
   eiFetch: typeof eiFetch;
 }
 
-const { processFetchHeaders } = HEADERS;
 const eiFetch = (
   url: string,
   { method, data, isAsync = false, host, headers, ...args }: FetchOptions,
 ): Promise<FetchResponse> => {
-  const processedHeaders = processFetchHeaders({
+  const processedHeaders = HEADERS.processFetchHeaders({
     isAsync,
     host,
     data,
