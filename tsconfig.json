@@ -14,11 +14,7 @@
     "isolatedModules": true,
     "noEmit": false,
     "sourceMap": true,
-    "declaration": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    "declaration": true
   },
   "ts-node": {
     "compilerOptions": {

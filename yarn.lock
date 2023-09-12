@@ -1378,7 +1378,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.20.2
     "@babel/preset-env": ^7.20.2
-    "@bearei/ei": ^1.2.6
+    "@bearei/ei": ^1.2.7
     "@types/glob": ^8.0.0
     "@types/jest": ^29.2.2
     "@types/node": ^18.11.9
@@ -1409,10 +1409,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bearei/ei@npm:^1.2.6":
-  version: 1.2.6
-  resolution: "@bearei/ei@npm:1.2.6"
-  checksum: c9aba4c0432c94230614c81f51453c7eda88088b0c0e2e7f5bd260f3241829fd50030944867a127467d9a6e435a6c39ed9bdf928a6902fd83c4f6f4036133a8a
+"@bearei/ei@npm:^1.2.7":
+  version: 1.2.7
+  resolution: "@bearei/ei@npm:1.2.7"
+  checksum: 37c7e9510ab022fd3b4b5350fcb91ee165708e180b803761fd84d75e47ebbe84da32f7bb057ab0957800274a0d75a0fa4d382d392f7fe5da1061f4aa18829708
   languageName: node
   linkType: hard
 

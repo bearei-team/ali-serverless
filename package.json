@@ -1,6 +1,6 @@
 {
   "name": "@bearei/ali-serverless",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "./lib/commonjs/index",
   "module": "./lib/module/index",
   "types": "./lib/commonjs/index.d.ts",
@@ -22,7 +22,7 @@
     "url": "https://github.com/bearei-team/ali-serverless/issues"
   },
   "dependencies": {
-    "@bearei/ei": "^1.2.6"
+    "@bearei/ei": "^1.2.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
