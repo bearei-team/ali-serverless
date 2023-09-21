@@ -21,10 +21,6 @@ export interface FetchOptions extends EIFetchOptions {
     host: string;
 }
 
-export interface CreatedFetch {
-    eiFetch: typeof eiFetch;
-}
-
 const eiFetch = (
     url: string,
     {method, data, isAsync = false, host, headers, ...args}: FetchOptions,
@@ -43,6 +39,4 @@ const eiFetch = (
     });
 };
 
-const createFetch = (): CreatedFetch => ({eiFetch});
-
-export const FETCH = createFetch();
+export const FETCH = {eiFetch};

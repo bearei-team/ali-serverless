@@ -9,7 +9,7 @@ export type CreateProcessInvokeErrorOptions = Pick<
 
 export interface ProcessErrorOptions extends CreateProcessInvokeErrorOptions {
     /**
-     * The request ID for the current invocation of the Serverless function
+     * The request ID for the current invocation of the Serverless function.
      */
     requestId?: string;
 }
@@ -31,22 +31,18 @@ export interface ServerlessErr extends Err, Partial<ProcessErrorOptions> {
     chains?: ProcessErrorOptions[];
 }
 
-export interface CreatedError {
-    createProcessInvokeError: typeof createProcessInvokeError;
-}
-
 const createErr = (
     error: ServerlessErr,
     {serviceName, functionName, requestId, path}: ProcessErrorOptions,
 ): ServerlessErr => {
     const status = error.status ?? 500;
     const statusText = error.statusText ?? '';
-    const code = error.code ?? typeof error.code === 'number' ? error.code : status;
+    const code = typeof error.code === 'number' ? error.code : status;
     const err = (error.status ? error : {error}) as ServerlessErr;
-    const currentChains = [{serviceName, functionName, path}];
+    const curChains = [{serviceName, functionName, path}];
     const message = error.message ?? `${serviceName}.${functionName}.${path} invoke failed`;
     const chains =
-        err.chains && Array.isArray(err.chains) ? [...currentChains, ...err.chains] : currentChains;
+        err.chains && Array.isArray(err.chains) ? [...curChains, ...err.chains] : curChains;
 
     return Object.assign(new Error(), {
         ...err,
@@ -71,6 +67,4 @@ const createProcessInvokeError =
         throw createErr(error, {...options, requestId});
     };
 
-const createError = (): CreatedError => ({createProcessInvokeError});
-
-export const ERROR = createError();
+export const ERROR = {createProcessInvokeError};

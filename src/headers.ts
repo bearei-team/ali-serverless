@@ -11,10 +11,6 @@ export interface ProcessedFetchHeaders extends Record<string, string | undefined
     'x-fc-invocation-type'?: string;
 }
 
-export interface CreatedHeaders {
-    processFetchHeaders: typeof processFetchHeaders;
-}
-
 const processFetchHeaders = ({
     isAsync,
     host,
@@ -35,6 +31,4 @@ const processFetchHeaders = ({
     return headers;
 };
 
-const createHeaders = (): CreatedHeaders => ({processFetchHeaders});
-
-export const HEADERS = createHeaders();
+export const HEADERS = {processFetchHeaders};
